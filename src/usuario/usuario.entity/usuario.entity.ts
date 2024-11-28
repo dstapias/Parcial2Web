@@ -9,8 +9,15 @@ export enum Rol {
     DECANA = 'DECANA'
 }
 
+export enum GrupoInvestigacion {
+    TICSW = 'TICSW',
+    IMAGINE = 'IMAGINE',
+    COMIT = 'COMIT',
+}
+
 @Entity()
 export class UsuarioEntity {
+
     @PrimaryGeneratedColumn("uuid")
     id: string;
     @Column()
@@ -26,6 +33,7 @@ export class UsuarioEntity {
         enum: Rol,
         default: Rol.PROF,
     })
+    rol: Rol;
 
     @ManyToOne(() => UsuarioEntity, jefe => jefe.subordinados)
     jefe: UsuarioEntity;
