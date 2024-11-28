@@ -12,4 +12,5 @@ export class PropuestaDto {
   @IsNotEmpty()
   @IsNumber()
   palabraClave: number;
+
 }
