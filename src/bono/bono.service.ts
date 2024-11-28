@@ -8,7 +8,7 @@ import { UsuarioEntity } from 'src/usuario/usuario.entity/usuario.entity';
 import { ClaseEntity } from 'src/clase/clase.entity/clase.entity';
 
 @Injectable()
-export class UsuarioService {
+export class BonoService {
     constructor(
         @InjectRepository(BonoEntity)
         private readonly bonoRepository: Repository<BonoEntity>,
@@ -49,7 +49,7 @@ export class UsuarioService {
         return usuario.bonos;
     }
 
-    async findBonoByclaseId(cod: string): Promise<BonoEntity[]> {
+    async findBonoByCod(cod: string): Promise<BonoEntity[]> {
         const clase: ClaseEntity = await this.claseRepository.findOne({where: {codigo: cod}, relations: ["bonos", "usuarios"]});
         if (!clase)
           throw new BusinessLogicException("No se encontró la clase", BusinessError.NOT_FOUND)
