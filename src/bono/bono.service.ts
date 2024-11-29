@@ -12,7 +12,9 @@ export class BonoService {
     constructor(
         @InjectRepository(BonoEntity)
         private readonly bonoRepository: Repository<BonoEntity>,
+        @InjectRepository(UsuarioEntity)
         private readonly usuarioRepository: Repository<UsuarioEntity>,
+        @InjectRepository(ClaseEntity)
         private readonly claseRepository: Repository<ClaseEntity>
     ) { }
 
