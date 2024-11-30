@@ -15,7 +15,7 @@ export class ClaseEntity {
     @Column()
     creditos: number;
 
-    @ManyToOne(() => UsuarioEntity, usuario => usuario.clases)
+    @ManyToOne(() => UsuarioEntity, usuario => usuario.clases, { onDelete: 'SET NULL' })
     usuario: UsuarioEntity;
 
     @OneToMany(() => BonoEntity, bono => bono.clase)
