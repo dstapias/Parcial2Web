@@ -1,0 +1,1590 @@
+{
+	"info": {
+		"_postman_id": "ca5ac33c-0e68-4507-949e-3661cd606ffb",
+		"name": "Parcial2Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34486022"
+	},
+	"item": [
+		{
+			"name": "Crear una DECANA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"decana_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 12345678,\r\n  \"rol\": \"DECANA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una DECANA",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 12345678,\r\n  \"rol\": \"DECANA\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"cedula\": 123456789,\r\n    \"grupoInvestigacion\": \"TICSW\",\r\n    \"numeroExtension\": 12345678,\r\n    \"rol\": \"DECANA\",\r\n    \"id\": \"550f086f-f248-47b6-919a-af4eaa5e9814\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Decana sin 8 digitos en la extensión",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 123456,\r\n  \"rol\": \"DECANA\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Decana sin 8 digitos en la extensión",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 123456,\r\n  \"rol\": \"DECANA\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": \"La extension debe tener 8 caracteres\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un profesor para bono",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"profesor_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un profesor para bono",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"cedula\": 123456789,\r\n    \"grupoInvestigacion\": \"TICSW\",\r\n    \"numeroExtension\": 4567,\r\n    \"rol\": \"PROF\",\r\n    \"jefe\": \"550f086f-f248-47b6-919a-af4eaa5e9814\",\r\n    \"id\": \"29832c47-892a-4a9e-be21-95897fca4006\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un profesor para eliminarlo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"profesor_id_del\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear un profesor para eliminarlo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"cedula\": 123456789,\r\n    \"grupoInvestigacion\": \"TICSW\",\r\n    \"numeroExtension\": 4567,\r\n    \"rol\": \"PROF\",\r\n    \"jefe\": \"06c8a69f-3288-44e9-80c2-7bdfc0889190\",\r\n    \"id\": \"0574062f-fa88-44eb-aa93-3d9c7c3c9bfb\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Profesor con grupo de investigación erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"ERROR\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Profesor con grupo de investigación erroneo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"ERROR\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefe\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": \"El grupo de investigacion no existe\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Clase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"clase_id\", data.id);\r",
+							"pm.globals.set(\"clase_cod\", data.codigo);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Matemáticas Avanzadas\",\r\n  \"codigo\": \"MAT1000001\",\r\n  \"creditos\": 3,\r\n  \"usuario\": \"{{profesor_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clase"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Clase",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Matemáticas Avanzadas\",\r\n  \"codigo\": \"MAT1000001\",\r\n  \"creditos\": 3,\r\n  \"usuario\": \"{{profesor_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clase"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"nombre\": \"Matemáticas Avanzadas\",\r\n    \"codigo\": \"MAT1000001\",\r\n    \"creditos\": 3,\r\n    \"usuario\": \"29832c47-892a-4a9e-be21-95897fca4006\",\r\n    \"id\": \"a3f769c7-6089-4366-ab0e-fc79b6c5f0bd\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Clase con código erroneo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Matemáticas Avanzadas\",\r\n  \"codigo\": \"MAT100001\",\r\n  \"creditos\": 3,\r\n  \"usuario\": \"{{profesor_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clase",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clase"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Clase con código erroneo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Matemáticas Avanzadas\",\r\n  \"codigo\": \"MAT100001\",\r\n  \"creditos\": 3,\r\n  \"usuario\": \"{{profesor_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clase"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": \"Debe tener diez caracteres el codigo\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Bono",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"bono_id_4\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 4.5,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\"id\": \"{{profesor_id}}\"},\r\n  \"clase\": {\"id\": \"{{clase_id}}\"}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Bono",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 4.5,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\"id\": \"{{profesor_id}}\"},\r\n  \"clase\": {\"id\": \"{{clase_id}}\"}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"monto\": 5000,\r\n    \"calificacion\": 4.5,\r\n    \"palabraClave\": \"excelencia\",\r\n    \"usuario\": {\r\n        \"id\": \"29832c47-892a-4a9e-be21-95897fca4006\"\r\n    },\r\n    \"clase\": {\r\n        \"id\": \"a3f769c7-6089-4366-ab0e-fc79b6c5f0bd\"\r\n    },\r\n    \"id\": \"f431bee8-d783-42a1-bbbd-851ccb33fa46\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Bono Menor a 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"bono_id_3\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 3.9,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\"id\": \"{{profesor_id}}\"},\r\n  \"clase\": {\"id\": \"{{clase_id}}\"}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Bono Menor a 4",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 3.9,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\"id\": \"{{profesor_id}}\"},\r\n  \"clase\": {\"id\": \"{{clase_id}}\"}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"monto\": 5000,\r\n    \"calificacion\": 3.9,\r\n    \"palabraClave\": \"excelencia\",\r\n    \"usuario\": {\r\n        \"id\": \"29832c47-892a-4a9e-be21-95897fca4006\"\r\n    },\r\n    \"clase\": {\r\n        \"id\": \"a3f769c7-6089-4366-ab0e-fc79b6c5f0bd\"\r\n    },\r\n    \"id\": \"9f47634c-418b-4fd6-9cab-5ffccd3b8ae1\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear Bono Decana",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 4.5,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\r\n    \"id\": \"{{decana_id}}\"\r\n    },\r\n  \"clase\":{ \"id\": \"{{clase_id}}\"}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear Bono Decana",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"monto\": 5000,\r\n  \"calificacion\": 4.5,\r\n  \"palabraClave\": \"excelencia\",\r\n  \"usuario\": {\r\n    \"id\": \"{{decana_id}}\"\r\n    },\r\n  \"clase\":{ \"id\": \"{{clase_id}}\"}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": \"El usuario debe ser profesor\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "BuscarDecana",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario/{{decana_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario",
+						"{{decana_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "BuscarDecana",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario/{{decana_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"{{decana_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"550f086f-f248-47b6-919a-af4eaa5e9814\",\r\n    \"cedula\": 123456789,\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"grupoInvestigacion\": \"TICSW\",\r\n    \"numeroExtension\": 12345678,\r\n    \"rol\": \"DECANA\",\r\n    \"subordinados\": [\r\n        {\r\n            \"id\": \"29832c47-892a-4a9e-be21-95897fca4006\",\r\n            \"cedula\": 123456789,\r\n            \"nombre\": \"Juan Pérez\",\r\n            \"grupoInvestigacion\": \"TICSW\",\r\n            \"numeroExtension\": 4567,\r\n            \"rol\": \"PROF\"\r\n        }\r\n    ],\r\n    \"jefe\": null,\r\n    \"clases\": [],\r\n    \"bonos\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "BuscarProfesor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario",
+						"{{profesor_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "BuscarProfesor",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"{{profesor_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"65bca218-c05a-499b-9850-9786a3a0fa91\",\r\n    \"cedula\": 123456789,\r\n    \"nombre\": \"Juan Pérez\",\r\n    \"grupoInvestigacion\": \"TICSW\",\r\n    \"numeroExtension\": 4567,\r\n    \"rol\": \"PROF\",\r\n    \"subordinados\": [],\r\n    \"jefe\": {\r\n        \"id\": \"7be01a7e-fbae-41c4-b0a8-9309ed6eace3\",\r\n        \"cedula\": 123456789,\r\n        \"nombre\": \"Juan Pérez\",\r\n        \"grupoInvestigacion\": \"TICSW\",\r\n        \"numeroExtension\": 12345678,\r\n        \"rol\": \"DECANA\"\r\n    },\r\n    \"clases\": [\r\n        {\r\n            \"id\": \"2793da99-44e5-4b68-a0af-7ceeef02a5de\",\r\n            \"nombre\": \"Matemáticas Avanzadas\",\r\n            \"codigo\": \"MAT1000001\",\r\n            \"creditos\": 3\r\n        }\r\n    ],\r\n    \"bonos\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Buscar Clase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clase/{{clase_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clase",
+						"{{clase_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar Clase",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/clase/{{clase_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"clase",
+								"{{clase_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"id\": \"a3f769c7-6089-4366-ab0e-fc79b6c5f0bd\",\r\n    \"nombre\": \"Matemáticas Avanzadas\",\r\n    \"codigo\": \"MAT1000001\",\r\n    \"creditos\": 3,\r\n    \"bonos\": [\r\n        {\r\n            \"id\": \"e7b92222-d144-46e9-8abe-6d67c72c06ef\",\r\n            \"monto\": 5000,\r\n            \"calificacion\": 4.5,\r\n            \"palabraClave\": \"excelencia\"\r\n        },\r\n        {\r\n            \"id\": \"f20764c4-a683-46ec-9ed9-eb856b65cfab\",\r\n            \"monto\": 5000,\r\n            \"calificacion\": 4.5,\r\n            \"palabraClave\": \"excelencia\"\r\n        }\r\n    ],\r\n    \"usuario\": {\r\n        \"id\": \"29832c47-892a-4a9e-be21-95897fca4006\",\r\n        \"cedula\": 123456789,\r\n        \"nombre\": \"Juan Pérez\",\r\n        \"grupoInvestigacion\": \"TICSW\",\r\n        \"numeroExtension\": 4567,\r\n        \"rol\": \"PROF\"\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Buscar Bono Por Usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono/bonos/usuario/{{profesor_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono",
+						"bonos",
+						"usuario",
+						"{{profesor_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar Bono Por Usuario",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono/bonos/usuario/{{profesor_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono",
+								"bonos",
+								"usuario",
+								"{{profesor_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"e7b92222-d144-46e9-8abe-6d67c72c06ef\",\r\n        \"monto\": 5000,\r\n        \"calificacion\": 4.5,\r\n        \"palabraClave\": \"excelencia\"\r\n    },\r\n    {\r\n        \"id\": \"f20764c4-a683-46ec-9ed9-eb856b65cfab\",\r\n        \"monto\": 5000,\r\n        \"calificacion\": 4.5,\r\n        \"palabraClave\": \"excelencia\"\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Buscar Bono Por Codigo Clase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono/bonos/clase/{{clase_cod}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono",
+						"bonos",
+						"clase",
+						"{{clase_cod}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Buscar Bono Por Codigo Clase",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono/bonos/clase/{{clase_cod}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono",
+								"bonos",
+								"clase",
+								"{{clase_cod}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"e7b92222-d144-46e9-8abe-6d67c72c06ef\",\r\n        \"monto\": 5000,\r\n        \"calificacion\": 4.5,\r\n        \"palabraClave\": \"excelencia\"\r\n    },\r\n    {\r\n        \"id\": \"f20764c4-a683-46ec-9ed9-eb856b65cfab\",\r\n        \"monto\": 5000,\r\n        \"calificacion\": 4.5,\r\n        \"palabraClave\": \"excelencia\"\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Eliminar Bono",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono/{{bono_id_4}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono",
+						"{{bono_id_4}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar Bono",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono/{{bono_id_4}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono",
+								"{{bono_id_4}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar Bono menor a 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"    pm.response.to.have.status(412);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bono/{{bono_id_3}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bono",
+						"{{bono_id_3}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar Bono menor a 4",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/bono/{{bono_id_3}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"bono",
+								"{{bono_id_3}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 412,\r\n    \"message\": \"No se puede eliminar el bono porque la calificacion no es mayor a 4\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar Profesor con Bono",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"    pm.response.to.have.status(412);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario",
+						"{{profesor_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar Profesor con Bono",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"{{profesor_id}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 412,\r\n    \"message\": \"No se puede eliminar el usuario porque tiene bonos\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar Profesor sin Bono",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id_del}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"usuario",
+						"{{profesor_id_del}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar Profesor sin Bono",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Juan Pérez\",\r\n  \"cedula\": 123456789,\r\n  \"grupoInvestigacion\": \"TICSW\",\r\n  \"numeroExtension\": 4567,\r\n  \"rol\": \"PROF\",\r\n  \"jefeId\": \"{{decana_id}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/usuario/{{profesor_id_del}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"usuario",
+								"{{profesor_id_del}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

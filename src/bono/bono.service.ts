@@ -19,10 +19,13 @@ export class BonoService {
     ) { }
 
     async crearBono(bono: BonoEntity): Promise<BonoEntity> {
+        const usuario = await this.usuarioRepository.findOne({
+            where: { id: bono.usuario.id },
+        });
         if (!bono.monto && bono.monto < 1) {
             throw new BusinessLogicException("El monto debe existir y ser positivo", BusinessError.BAD_REQUEST);
         }
-        if ( bono.usuario.rol == 'DECANA') {
+        if ( usuario.rol == 'DECANA') {
             throw new BusinessLogicException("El usuario debe ser profesor", BusinessError.BAD_REQUEST);
         }
         return await this.bonoRepository.save(bono);
