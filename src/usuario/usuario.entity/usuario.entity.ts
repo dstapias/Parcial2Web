@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* archivo: src/artist/artist.entity.ts */
-import { BonoEntity } from "src/bono/bono.entity/bono.entity";
-import { ClaseEntity } from "src/clase/clase.entity/clase.entity";
+import { BonoEntity } from "../../bono/bono.entity/bono.entity";
+import { ClaseEntity } from "../../clase/clase.entity/clase.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum Rol {
@@ -29,7 +29,7 @@ export class UsuarioEntity {
     @Column()
     numeroExtension: number;
     @Column({
-        type: 'enum',
+        type: 'text',
         enum: Rol,
         default: Rol.PROF,
     })
