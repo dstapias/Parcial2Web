@@ -86,9 +86,10 @@ describe('UsuarioService', () => {
     }
   });
 
+
   it('findUsuarioById debe lanzar excepción para un usuario inexistente', async () => {
     const idInexistente = '123e4567-e89b-12d3-a456-426614174000';
-    try { const result = service.findUsuarioById(idInexistente); }
+    try { await service.findUsuarioById(idInexistente); }
     catch (error) {
       expect(error.message).toBe("No se encontró el usuario");
     }
@@ -107,7 +108,7 @@ describe('UsuarioService', () => {
       clases: [],
       bonos: [],
     };
-    
+
     await service.crearUsuario(nuevoUsuario);
     const result = await service.findUsuarioById(nuevoUsuario.id);
     expect(result).toBeDefined();
@@ -115,6 +116,79 @@ describe('UsuarioService', () => {
     expect(result.nombre).toEqual(nuevoUsuario.nombre);
   });
 
+  it('Eliminar usuario debe lanzar excepción al ser DECANA', async () => {
+    const nuevoUsuario: UsuarioEntity = {
+      id: '',
+      nombre: 'María Gómez',
+      cedula: 987654321,
+      grupoInvestigacion: 'IMAGINE',
+      numeroExtension: 87654321,
+      rol: Rol.DECANA,
+      subordinados: [],
+      jefe: null,
+      clases: [],
+      bonos: [],
+    };
+
+    await service.crearUsuario(nuevoUsuario);
+    try { await service.deleteUsuarioId(nuevoUsuario.id); }
+    catch (error) {
+      expect(error.message).toBe("No se puede eliminar porque es DECANA");
+    }
+  });
+
+  it('Eliminar usuario debe eliminar al ser PROF sin bonos', async () => {
+    const nuevoUsuario: UsuarioEntity = {
+      id: '',
+      nombre: 'María Gómez',
+      cedula: 987654321,
+      grupoInvestigacion: 'IMAGINE',
+      numeroExtension: 87654321,
+      rol: Rol.PROF,
+      subordinados: [],
+      jefe: null,
+      clases: [],
+      bonos: [],
+    };
+
+    await service.crearUsuario(nuevoUsuario);
+    await service.deleteUsuarioId(nuevoUsuario.id);
+    try { await service.findUsuarioById(nuevoUsuario.id); }
+    catch (error) {
+      expect(error.message).toBe("No se encontró el usuario");
+    }
+  });
+
+  it('Eliminar usuario debe mostrar excepción al ser PROF con bonos', async () => {
+    let nuevoUsuario: UsuarioEntity = {
+      id: '',
+      nombre: 'María Gómez',
+      cedula: 987654321,
+      grupoInvestigacion: 'IMAGINE',
+      numeroExtension: 87654321,
+      rol: Rol.PROF,
+      subordinados: [],
+      jefe: null,
+      clases: [],
+      bonos: [],
+    };
+    nuevoUsuario.bonos = [
+      {
+        id: '1',
+        monto: 500,
+        calificacion: 5,
+        palabraClave: 'excelencia',
+        usuario: nuevoUsuario,
+        clase: null,
+      } as any,
+    ];
+
+    await service.crearUsuario(nuevoUsuario);
+    try { await service.deleteUsuarioId(nuevoUsuario.id); }
+    catch (error) {
+      expect(error.message).toBe("No se puede eliminar el usuario porque tiene bonos");
+    }
+  });
 });
 
 /*archivo src/museum/museum.service.spec.ts*/
