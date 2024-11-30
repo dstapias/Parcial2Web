@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { UsuarioEntity } from './usuario.entity/usuario.entity';
 import { BonoEntity } from 'src/bono/bono.entity/bono.entity';
 
@@ -18,7 +18,7 @@ export class UsuarioService {
         if (usuario.rol == 'PROF' && !gruposPermitidos.includes(usuario.grupoInvestigacion)) {
             throw new BusinessLogicException("El grupo de investigacion no existe", BusinessError.BAD_REQUEST);
         }
-        if (usuario.rol == 'DECANA' && usuario.numeroExtension > 9999999 &&  usuario.numeroExtension< 100000000 ) {
+        if (usuario.rol == 'DECANA' && usuario.numeroExtension.toString().length !== 8) {
             throw new BusinessLogicException("La extension debe tener 8 caracteres", BusinessError.BAD_REQUEST);
         }
         return await this.usuarioRepository.save(usuario);
@@ -48,13 +48,6 @@ export class UsuarioService {
             throw new BusinessLogicException("No se puede eliminar porque es DECANA", BusinessError.BAD_REQUEST);
         }
         await this.usuarioRepository.remove(usuario);
-    }
-
-    async findBonoByUsuarioId(usuarioId: string): Promise<BonoEntity[]> {
-        const usuario: UsuarioEntity = await this.usuarioRepository.findOne({where: {id: usuarioId}, relations: ["subordinados", "jefe", "clases", "bonos"]});
-        if (!usuario)
-          throw new BusinessLogicException("No se encontró el usuario", BusinessError.NOT_FOUND)
-        return usuario.bonos;
     }
 
 }

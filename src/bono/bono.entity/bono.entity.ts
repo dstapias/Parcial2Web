@@ -8,7 +8,7 @@ export class BonoEntity {
     id: string;
     @Column()
     monto: number;
-    @Column()
+    @Column('float')
     calificacion: number
     @Column()
     palabraClave: string;

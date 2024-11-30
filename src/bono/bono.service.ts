@@ -19,11 +19,10 @@ export class BonoService {
     ) { }
 
     async crearBono(bono: BonoEntity): Promise<BonoEntity> {
-        const gruposPermitidos = ['TICSW', 'IMAGINE', 'COMIT'];
         if (!bono.monto && bono.monto < 1) {
             throw new BusinessLogicException("El monto debe existir y ser positivo", BusinessError.BAD_REQUEST);
         }
-        if ( !(bono.usuario.rol == 'PROF')) {
+        if ( bono.usuario.rol == 'DECANA') {
             throw new BusinessLogicException("El usuario debe ser profesor", BusinessError.BAD_REQUEST);
         }
         return await this.bonoRepository.save(bono);
@@ -52,7 +51,7 @@ export class BonoService {
     }
 
     async findBonoByCod(cod: string): Promise<BonoEntity[]> {
-        const clase: ClaseEntity = await this.claseRepository.findOne({where: {codigo: cod}, relations: ["bonos", "usuarios"]});
+        const clase: ClaseEntity = await this.claseRepository.findOne({where: {codigo: cod}, relations: ["bonos", "usuario"]});
         if (!clase)
           throw new BusinessLogicException("No se encontró la clase", BusinessError.NOT_FOUND)
         
